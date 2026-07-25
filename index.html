@@ -635,8 +635,7 @@
   });
 
   // ---------- Enquiry form ----------
-  // TODO: replace {YOUR_FORM_ID} with your actual Formspree form ID.
-  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/{YOUR_FORM_ID}';
+  var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/kwswee@gmail.com';
 
   var form = document.getElementById('enquiry-form');
   var statusEl = document.getElementById('form-status');
@@ -701,13 +700,15 @@
       name: fields.name.input.value.trim(),
       email: fields.email.input.value.trim(),
       company: fields.company.input.value.trim(),
-      message: fields.message.input.value.trim()
+      message: fields.message.input.value.trim(),
+      _subject: 'New enquiry from Momentum website',
+      _captcha: 'false'
     };
 
     submitBtn.disabled = true;
     setStatus('Sending…', 'sending');
 
-    fetch(FORMSPREE_ENDPOINT, {
+    fetch(FORMSUBMIT_ENDPOINT, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -721,9 +722,7 @@
           form.reset();
         } else {
           return response.json().catch(function () { return null; }).then(function (data) {
-            var message = (data && data.errors && data.errors.length)
-              ? data.errors.map(function (err) { return err.message; }).join(' ')
-              : 'Something went wrong. Please try again in a moment.';
+            var message = (data && data.message) || 'Something went wrong. Please try again in a moment.';
             setStatus(message, 'error');
           });
         }

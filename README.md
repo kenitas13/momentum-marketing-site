@@ -4,13 +4,15 @@ A one-page marketing consultancy website built with plain HTML, CSS, and JavaScr
 
 **Live site:** https://kenitas13.github.io/momentum-marketing-site/
 
+![Screenshot of the Momentum landing page](assets/screenshot.png)
+
 ## Structure
 
 Everything lives in a single file, [index.html](index.html):
 
 - **Hero** — full-height intro with headline, subheadline, and a CTA that smooth-scrolls to the enquiry form.
 - **Testimonials** — a responsive 3-card grid of client quotes.
-- **Enquiry form** — Name / Email / Company (optional) / Message, submitted via `fetch()` to [Formspree](https://formspree.io/).
+- **Enquiry form** — Name / Email / Company (optional) / Message, submitted via `fetch()` to [FormSubmit](https://formsubmit.co/).
 
 ## Running locally
 
@@ -22,13 +24,13 @@ Start-Process "index.html"
 
 ## Configuration
 
-The enquiry form posts to a Formspree endpoint defined in the `<script>` block near the bottom of `index.html`:
+The enquiry form posts to a [FormSubmit](https://formsubmit.co/) endpoint defined in the `<script>` block near the bottom of `index.html`:
 
 ```js
-var FORMSPREE_ENDPOINT = 'https://formspree.io/f/{YOUR_FORM_ID}';
+var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/kwswee@gmail.com';
 ```
 
-Replace `{YOUR_FORM_ID}` with your actual Formspree form ID for submissions to go through. Until then, submitting the form will correctly show an inline error state.
+No account or form ID needed — FormSubmit routes submissions straight to the email address in the URL. The first submission to a new address triggers a one-time confirmation email that must be clicked before real submissions start delivering.
 
 ## Deployment
 

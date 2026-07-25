@@ -22,8 +22,8 @@ Everything lives in [index.html](index.html) in three inline blocks, in this ord
 2. **Body markup** — four sections in document order: sticky `<nav>`, `#home` (hero), `#testimonials` (3-card grid), `#contact` (enquiry form), `<footer>`. Nav links and the hero CTA are plain `href="#id"` anchors targeting these section IDs; each section has `scroll-margin-top` set so the sticky nav doesn't overlap the scroll target.
 3. **`<script>` block** at the end of `<body>` — two independent pieces of behavior:
    - Smooth-scroll handler: intercepts clicks on any `a[href^="#"]` and calls `scrollIntoView({behavior: 'smooth'})`.
-   - Enquiry form handler on `#enquiry-form`: client-side validation (required fields + email regex) against the `fields` map, then `fetch()`-posts JSON to the `FORMSPREE_ENDPOINT` constant with an `Accept: application/json` header, toggling status text/state (`sending` / `success` / `error`) in `#form-status`.
+   - Enquiry form handler on `#enquiry-form`: client-side validation (required fields + email regex) against the `fields` map, then `fetch()`-posts JSON to the `FORMSUBMIT_ENDPOINT` constant with an `Accept: application/json` header, toggling status text/state (`sending` / `success` / `error`) in `#form-status`.
 
 ## Key thing to know before editing the form
 
-`FORMSPREE_ENDPOINT` in the `<script>` block is a placeholder — `https://formspree.io/f/{YOUR_FORM_ID}`. It must be replaced with a real Formspree form ID for submissions to succeed; until then, submits will correctly hit the inline error path (this is expected, not a bug).
+`FORMSUBMIT_ENDPOINT` in the `<script>` block points at [FormSubmit](https://formsubmit.co/)'s AJAX endpoint (`https://formsubmit.co/ajax/{email}`) — no account or form ID needed, just the destination email baked into the URL. The first submission to a new destination email triggers a one-time confirmation email from FormSubmit that must be clicked before real submissions start delivering.
