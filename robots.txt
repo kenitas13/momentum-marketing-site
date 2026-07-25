@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kenitas13.github.io/momentum-marketing-site/sitemap.xml

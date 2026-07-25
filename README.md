@@ -8,11 +8,17 @@ A one-page marketing consultancy website built with plain HTML, CSS, and JavaScr
 
 ## Structure
 
-Everything lives in a single file, [index.html](index.html):
+Everything lives in a single file, [index.html](index.html), styled with a pastel palette (lavender/mint/peach on an off-white base, deep-indigo accent) after the layout patterns of freedomtech.tech:
 
-- **Hero** — full-height intro with headline, subheadline, and a CTA that smooth-scrolls to the enquiry form.
-- **Testimonials** — a responsive 3-card grid of client quotes.
+- **Hero** — headline, subheadline, primary CTA to the enquiry form, secondary CTA to the Growth Score quiz.
+- **Services marquee** — auto-scrolling band of what Momentum does.
+- **Approach** — a numbered 4-step "how we work" card grid.
+- **Growth Score quiz** — a 5-question interactive self-assessment (the site's lead magnet) that gives an instant score and hands off a summary into the enquiry form.
+- **Testimonials** — an auto-scrolling marquee of client quotes.
+- **FAQ** — an accessible accordion, mirrored in `FAQPage` structured data.
 - **Enquiry form** — Name / Email / Company (optional) / Message, submitted via `fetch()` to [FormSubmit](https://formsubmit.co/).
+
+Also includes `robots.txt`, `sitemap.xml`, and Open Graph/Twitter/JSON-LD metadata for SEO.
 
 ## Running locally
 
