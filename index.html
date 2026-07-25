@@ -1206,6 +1206,125 @@
     padding-top: 1.5rem;
   }
 
+  /* ---------- WhatsApp widget ---------- */
+  .whatsapp-widget {
+    position: fixed;
+    right: clamp(1rem, 4vw, 2rem);
+    bottom: clamp(1rem, 4vw, 2rem);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .whatsapp-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #075E54;
+    color: #FFFFFF;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .whatsapp-fab:hover {
+    background: #064E45;
+    transform: translateY(-2px);
+  }
+
+  .whatsapp-fab svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .whatsapp-panel {
+    width: min(320px, calc(100vw - 2rem));
+    background: var(--paper);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 1.25rem;
+    transform: translateY(12px) scale(0.97);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+
+  .whatsapp-widget.is-open .whatsapp-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .whatsapp-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .whatsapp-panel-header span {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .whatsapp-panel-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--ink-muted);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .whatsapp-panel-close:hover {
+    background: var(--lavender);
+    color: var(--ink);
+  }
+
+  .whatsapp-panel-sub {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+  }
+
+  .whatsapp-suggestions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .whatsapp-suggestion {
+    display: block;
+    text-decoration: none;
+    background: var(--mint);
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .whatsapp-suggestion:hover {
+    background: var(--lavender);
+    transform: translateX(2px);
+  }
+
   /* ---------- Reduced motion ---------- */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -1791,6 +1910,25 @@
   </div>
 </footer>
 
+<div class="whatsapp-widget" id="whatsapp-widget">
+  <div class="whatsapp-panel" id="whatsapp-panel" role="dialog" aria-label="Chat with us on WhatsApp" aria-hidden="true">
+    <div class="whatsapp-panel-header">
+      <span>Chat with Momentum</span>
+      <button type="button" class="whatsapp-panel-close" id="whatsapp-panel-close" aria-label="Close chat options">&times;</button>
+    </div>
+    <p class="whatsapp-panel-sub">Pick a question to start on WhatsApp, or ask your own.</p>
+    <ul class="whatsapp-suggestions">
+      <li><a class="whatsapp-suggestion" href="https://wa.me/6588513413?text=Hi!%20I'd%20like%20to%20learn%20more%20about%20Momentum's%20services." target="_blank" rel="noopener">Tell me about your services</a></li>
+      <li><a class="whatsapp-suggestion" href="https://wa.me/6588513413?text=Can%20we%20book%20a%20strategy%20call%3F" target="_blank" rel="noopener">Can we book a strategy call?</a></li>
+      <li><a class="whatsapp-suggestion" href="https://wa.me/6588513413?text=What's%20included%20in%20the%20Growth%20Score%20plan%3F" target="_blank" rel="noopener">What's included in the Growth Score plan?</a></li>
+      <li><a class="whatsapp-suggestion" href="https://wa.me/6588513413?text=I%20have%20a%20different%20question." target="_blank" rel="noopener">I have a different question</a></li>
+    </ul>
+  </div>
+  <button type="button" class="whatsapp-fab" id="whatsapp-fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="whatsapp-panel" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.001 3C9.107 3 3.5 8.607 3.5 15.5c0 2.373.657 4.59 1.797 6.487L3 29l7.212-2.256A12.44 12.44 0 0016 28c6.894 0 12.5-5.607 12.5-12.5S22.895 3 16.001 3zm7.34 17.66c-.31.87-1.53 1.62-2.51 1.83-.68.14-1.56.25-4.53-.97-3.8-1.57-6.24-5.42-6.43-5.67-.19-.25-1.53-2.04-1.53-3.9 0-1.85.97-2.76 1.32-3.14.31-.34.68-.42.9-.42.23 0 .46 0 .66.01.21.01.5-.08.78.6.31.75 1.05 2.6 1.14 2.79.09.19.15.41.03.66-.12.25-.18.4-.36.62-.18.22-.38.49-.54.66-.18.19-.37.39-.16.76.21.37.94 1.55 2.02 2.51 1.39 1.24 2.56 1.62 2.93 1.81.37.19.59.16.81-.09.22-.25.94-1.09 1.19-1.47.25-.37.5-.31.83-.19.34.12 2.17 1.02 2.54 1.21.37.19.62.28.71.44.09.16.09.94-.22 1.81z"/></svg>
+  </button>
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -2022,6 +2160,12 @@
     return isValid;
   }
 
+  function speakThankYou() {
+    if (!('speechSynthesis' in window)) return;
+    var utterance = new SpeechSynthesisUtterance('Thank you for your submission. We will get back to you in 3 business days.');
+    window.speechSynthesis.speak(utterance);
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     setStatus('', null);
@@ -2055,6 +2199,7 @@
         if (response.ok) {
           setStatus("Thanks — your message is on its way. We'll be in touch soon.", 'success');
           form.reset();
+          speakThankYou();
         } else {
           return response.json().catch(function () { return null; }).then(function (data) {
             var message = (data && data.message) || 'Something went wrong. Please try again in a moment.';
@@ -2069,6 +2214,49 @@
         submitBtn.disabled = false;
       });
   });
+
+  // ---------- WhatsApp widget ----------
+  (function () {
+    var widget = document.getElementById('whatsapp-widget');
+    var fab = document.getElementById('whatsapp-fab');
+    var panel = document.getElementById('whatsapp-panel');
+    var closeBtn = document.getElementById('whatsapp-panel-close');
+
+    function openPanel() {
+      widget.classList.add('is-open');
+      fab.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePanel() {
+      widget.classList.remove('is-open');
+      fab.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+    }
+
+    fab.addEventListener('click', function () {
+      if (widget.classList.contains('is-open')) {
+        closePanel();
+      } else {
+        openPanel();
+      }
+    });
+
+    closeBtn.addEventListener('click', closePanel);
+
+    document.addEventListener('click', function (e) {
+      if (widget.classList.contains('is-open') && !widget.contains(e.target)) {
+        closePanel();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && widget.classList.contains('is-open')) {
+        closePanel();
+        fab.focus();
+      }
+    });
+  })();
 </script>
 
 </body>
